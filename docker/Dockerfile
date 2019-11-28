@@ -20,8 +20,16 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 
+# We don't want the .env file from local development to creep into this
+RUN rm .env
+# Remove the node modules if any get copied 
+RUN rm -rf node_modules
+
+ENV RAILS_ENV production
+ENV RAILS_SERVE_STATIC_FILES true
+
 RUN bundle
-RUN yarn
+RUN yarn install
 RUN bundle exec rake assets:precompile
 
 # Add a script to be executed every time the container starts.

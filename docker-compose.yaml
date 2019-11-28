@@ -15,6 +15,11 @@ services:
     environment:
       - REDIS_URL=redis://redis:6379
       - POSTGRES_HOST=postgres
+      - SECRET_KEY_BASE=change_this_value
+      - POSTGRES_DB=chatwoot
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - RAILS_ENV=development
     command: ["foreman", "start", "-f", "./docker/Procfile.docker.dev"]
 
   postgres:
@@ -27,8 +32,7 @@ services:
     environment:
       - POSTGRES_DB=chatwoot
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=
-
+      - POSTGRES_PASSWORD=postgres
   redis:
     image: redis:alpine
     restart: always
